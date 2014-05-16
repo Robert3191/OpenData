@@ -1,0 +1,42 @@
+<div style="margin-top: 35px">
+    <!-- Button trigger modal -->
+    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">
+        Add chart
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Chart options</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <select class="form-control" ng-init="selectedChart = selectedChart || chartTypes[0]" ng-model="selectedChart" ng-options='chart as chart.type for chart in chartTypes' >
+
+                            </select>
+                        </div>
+
+                        <div class=" col-lg-offset-3 col-lg-3">
+                            <img src="{{selectedChart.imgURL}}" alt="{{selectedChart.type}}" class="img-thumbnail" style="height: 80px">
+                        </div>
+                    </div>
+
+                    <select class="form-control" ng-init="selectedConfig = defConf || currentConfig[0]" ng-model="selC" ng-options='config as config.title for config in currentConfig' >
+
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="addChart(selectedChart.type, selC)">Add chart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="d3Charts"></div>
+
+</div>

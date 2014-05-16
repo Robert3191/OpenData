@@ -1,0 +1,41 @@
+<!--<a href="#"><h1>Open Data</h1></a>-->
+<!--<ul class="list-od">-->
+    <!--<a class="a-elem-od" ng-repeat="api in apiList" style="display:block;" href="#/{{api.id}}">-->
+        <!--<li class="list-elem-od">{{api.title}}</li>-->
+    <!--</a>-->
+<!--</ul>-->
+
+
+<div class="sidemenu">
+    <div class="red-background" style="padding: 20px; margin-bottom: 5px;" >
+        <span class="glyphicon glyphicon-home" style="margin-right: 10px;"></span> <span style="font-size: 18px">HOME</span>
+    </div>
+
+    <div class="panel-group" id="accordion" data-ng-repeat="api in apiList">
+        <div class="panel panel-primary" style="border: 12px">
+            <div class="panel-heading" style="background-color: #555">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#{{api.title}}">
+                        <span class="glyphicon glyphicon-folder-close" style="margin-right: 10px;"></span> <span>{{api.title}}</span>
+                    </a>
+                </h4>
+            </div>
+            <div id="{{api.title}}" class="panel-collapse collapse">
+                <div class="panel-body" style="background-color: #555; border-color: #fff">
+                    <ul class="list-group">
+                        <a href="#/LiveView/{{data.title}}" data-ng-repeat="data in api.opendata">
+                            <li class="list-group-item" data-ng-click="setApi(data)">{{data.title}}</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+
+

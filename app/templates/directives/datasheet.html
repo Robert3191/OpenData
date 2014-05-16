@@ -1,0 +1,62 @@
+<div class="col-lg-10">
+    <div class="card-od">
+    <div class="card-container-od">
+        <div style="margin-top: 30px" style="background-color: #ffffff">
+            <table class="table table-bordered table-hover" style="background-color: #ffffff">
+                <thead style="background-color: #00a2ff; color:#ffffff">
+                <tr>
+                    <th>index</th>
+                    <th ng-repeat="c in columns"> {{c}}</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="row in data | orderBy:sortOrder:reverse" ng-show="showRow($index)">
+                    <td>{{$index}}</td>
+                    <td ng-repeat="(k,v) in row">{{v}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="text-center">
+
+
+                <button class="btn" ng-click="navigateLeft()">Prev</button>
+                <span class="badge">{{crtPag}}/{{totalPag}}</span>
+                <button class="btn" ng-click="navigateRight()">Next</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="col-lg-2">
+    <div class="card-od">
+        <div class="card-title-od">
+            <h3><span class="glyphicon glyphicon-cog" style="margin-right: 3px"></span>Option panel</h3>
+        </div>
+
+        <div class="card-container-od">
+            <p>Show range:</p>
+            <select class="form-control" ng-model="showRange">
+                <option value="">None</option>
+                <option ng-repeat='range in showRanges'>{{range}}</option>
+            </select>
+
+            <p>Order by:</p>
+            <select class="form-control" ng-model="sortOrder">
+               // <option value="" selected>None</option>
+                <option ng-repeat='column in columns' >{{column}}</option>
+            </select>
+
+            <p>Ascendent:</p>
+            <select class="form-control" ng-model="reverse">
+                <option value="false">Yes</option>
+                <option value="true">No</option>
+            </select>
+        </div>
+
+    </div>
+</div>

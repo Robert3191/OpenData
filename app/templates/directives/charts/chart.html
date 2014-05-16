@@ -1,0 +1,54 @@
+<div class='row'>
+    <div class='col-lg-8'>
+        <div class='card-od'>
+            <div class='card-container-od'>
+                <center>
+                    <div id='{{selector}}'>
+                        <center><h1 class="text-muted">Configure your chart</h1></center>
+                    </div>
+                </center>
+
+            </div>
+        </div>
+    </div>
+
+    <div class='col-lg-4'>
+        <div class='card-od'>
+            <div class='card-title-od'>
+                <h3><span class="glyphicon glyphicon-cog" style="margin-right: 3px"></span></span>Option panel</h3>
+            </div>
+            <div class='card-container-od'>
+                <div>
+                    <h2 class="text-center text-muted">{{title}}</h2>
+
+                    <span>Filter by:</span>
+                    <select class="form-control" ng-model="options.filteredBy">
+                        <option ng-repeat='name in columnNames'>{{name}}</option>
+                    </select>
+
+
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-2">Start:</div>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" id="startValueInput" placeholder="Value">
+                        </div>
+
+                        <div class="col-sm-2">End:</div>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" id="endValueInput" placeholder="Value">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" style="margin-top: 15px" ng-click="generateChart()">
+                        Generate
+                    </button>
+
+                    <button class="btn btn-danger" style="margin-top: 15px" ng-click="delete()">
+                        Delete
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

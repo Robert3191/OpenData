@@ -1,0 +1,147 @@
+.sidebar-od{
+    /*background-color: #191919;*/
+   background-color: #343434;
+    color: #ffffff;
+    min-height: 900px;
+}
+
+.list-od{
+    list-style-type:none;
+    color: #ffffff;
+}
+
+.list-elem-od{
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+
+    background-color: #121212;
+}
+
+.list-elem-od:hover{
+    background-color: #272727;
+    /*background-color: #2f2f2f;*/
+}
+
+.a-elem-od{
+    color:#ffffff;
+}
+.a-elem-od:link,
+.a-elem-od:hover{
+    display:block;
+    font-weight:bold;
+    color:#FFFFFF;
+    /*background-color:#98bf21;*/
+    width:100%;
+    text-align:center;
+    padding:4px;
+    text-decoration:none;
+    text-transform:uppercase;
+
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+
+}
+.a-elem-od:hover,
+.a-elem-od:active
+{
+    background-color:#272727;
+    /*background-color:#2f2f2f;*/
+}
+
+.card-od{
+    background-color: #FFFFFF;
+
+    margin-top: 10px;
+
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+
+    -webkit-box-shadow: #B3B3B3 4px 4px 4px;
+    -moz-box-shadow: #B3B3B3 4px 4px 4px;
+    box-shadow: #B3B3B3 4px 4px 4px;
+}
+
+.card-title-od{
+    /*background-color: #00a2ff;*/
+    background-color: steelblue;
+    color: #ffffff;
+    width: 100%;
+    padding-left: 3px;
+    font-size: 8px;
+}
+
+.card-container-od{
+    padding: 15px;
+}
+
+.bar {
+    fill: steelblue;
+}
+
+.bar:hover {
+    fill: brown;
+}
+
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+* {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+/*--------LINE CHART--------*/
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+
+.red-background{
+    background-color: #E60000;
+    color: #ffffff;
+}
+
+.grey-background{
+    background-color: #555;
+    color: #ffffff;
+}
+
+.grey-dark-background{
+    background-color: #333;
+    color: #ffffff;
+}
+
+.grey-darker-background{
+    background-color: #222;
+    color: #ffffff;
+}
+
+.sidemenu{
+    height: 1000px;
+
+}
+
+.list-group-item{
+    background-color: transparent; !important;
+    color: #ffffff; !important;
+}
