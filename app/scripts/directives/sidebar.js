@@ -13,7 +13,9 @@ openData.directive("sidebar", function() {
 
             $scope.setApi = function(data){
 
-                $rootScope.currentConfig = data.config;
+                //$rootScope.currentConfig = data.config;
+                Util.setConfig(data.config);
+                console.log($rootScope.currentConfig);
 
             }
         }

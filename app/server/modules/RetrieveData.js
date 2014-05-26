@@ -1,4 +1,5 @@
 var http = require("http");
+var requestify = require('requestify');
 
 
 /**
@@ -8,16 +9,15 @@ var http = require("http");
  */
 exports.getJSON = function(options, onResult)
 {
-    console.log("rest::getJSON");
 
-    var prot = http;
-    var req = prot.request(options, function(res)
+    var req = http.request(options, function(res)
     {
         var output = '';
-        console.log(options.host + ':' + res.statusCode);
+
         res.setEncoding('utf8');
 
         res.on('data', function (chunk) {
+            console.log(chunk);
             output += chunk;
         });
 
@@ -28,8 +28,9 @@ exports.getJSON = function(options, onResult)
     });
 
     req.on('error', function(err) {
-        //res.send('error: ' + err.message);
+        console.log(err);
     });
 
     req.end();
 };
+

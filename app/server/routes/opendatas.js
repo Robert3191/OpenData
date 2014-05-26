@@ -45,22 +45,29 @@ exports.data =function(req, res){
             ]
         },
         {
-            title:"ApiDemo2",
+            title:"City_Of_Chicago",
             id:2,
             opendata:[
                 {
-                    title:"Population", url:"rest/population",
-                    config:{
-                        title:"Anualy population",
-                        xAx:{name:"year", type:"number"},
-                        yAx:{name:"people", type:"number"},
-                        filters:[
-                            {name:"sex", type:"single"},
-                            {name:"age", type:"dual"}
-                        ]
+                    title:"2014_Ordinance_Amount", url:"rest/population",
+                    config:[
+                        {
+                        title:"Appropriations by Department",
+                        xAx:{name:"department_description", type:"number"},
+                        yAx:{name:"sum_2014_ordinance_amount", type:"number"},
+                        filters:[]
                     }
+                    ]
                 },
-                {title:"Debts", url:"rest/debts"}
+                {
+                    title:"2014_Ordinance_Amount", url:"rest/population",
+                    config:{
+                        title:"Appropriations by Department",
+                        xAx:{name:"department_description", type:"number"},
+                        yAx:{name:"sum_2014_ordinance_amount", type:"number"},
+                        filters:[]
+                    }
+                }
             ]
         }
     ]

@@ -1,20 +1,19 @@
 
-openData.controller("LiveViewCtrl", function($scope, $rootScope, $routeParams, $compile, $timeout, OpenDataFactory, CHART_TYPES) {
+openData.controller("LiveViewCtrl", function($scope, $rootScope, $routeParams, $compile, $timeout, OpenDataSocketFactory, CHART_TYPES) {
     var _timeout;
 
     $scope.chartTypes     = CHART_TYPES.chartTypes;
     $scope.selectedChart  =  $scope.chartTypes[0];
     $scope.areDataLoaded  = false;
     $scope.columnNames    = [];
-    $scope.defConf        = $rootScope.currentConfig[0];
+    $scope.currentConfig  = Util.getConfig();
+    $scope.defConf        = Util.getConfig()[0];
     $scope.selectedConfig = null;
 
+    console.log(Util.getConfig()[0]);
+    var firstLoad = true;
     var chart_ID;
-
     var apiURL    = $routeParams.data;
-    var urlParams = {
-        url: apiURL.toLowerCase()
-    };
 
     var getRandomId = function(){
         return Math.floor((Math.random() * 100) + 1);
@@ -56,26 +55,17 @@ openData.controller("LiveViewCtrl", function($scope, $rootScope, $routeParams, $
         }
     }
 
-    var update = function(interval){
-        var time = interval*3000;
-        _timeout = $timeout(getData, time);
-    }
+    OpenDataSocketFactory.emit('getData', apiURL.toLowerCase());
+    OpenDataSocketFactory.on('dataReceived', function(data){
+        $scope.title = data.title;
+        $scope.columnNames = Util.parseData(data)[0];
+        $scope.data = Util.parseData(data)[1];
+        $scope.timeout = data.timeout;
+        $scope.areDataLoaded = true;
 
-    var getData = function(){
-
-        OpenDataFactory.get(urlParams,
-            function(data){
-
-                $scope.title=data.title;
-                $scope.columnNames = Util.parseData(data)[0];
-                $scope.data = Util.parseData(data)[1];
-                $scope.timeout = data.timeout;
-                $scope.areDataLoaded = true;
-
-                update($scope.timeout);
-            }
-        );
-    }
-
-    getData();
+        if(firstLoad){
+            firstLoad = false;
+            $("#datasheetLoad").append($compile("<div datasheet data='data' title='Population' columns='columnNames'></div>")($scope));
+        }
+    });
 });

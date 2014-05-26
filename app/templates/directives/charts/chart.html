@@ -15,14 +15,14 @@
     <div class='col-lg-4'>
         <div class='card-od'>
             <div class='card-title-od'>
-                <h3><span class="glyphicon glyphicon-cog" style="margin-right: 3px"></span></span>Option panel</h3>
+                <h4><span class="glyphicon glyphicon-cog" style="margin-right: 3px"></span></span>Option panel</h4>
             </div>
             <div class='card-container-od'>
                 <div>
-                    <h2 class="text-center text-muted">{{title}}</h2>
+                    <h3 class="text-center text-muted">{{title}}</h3>
 
                     <span>Filter by:</span>
-                    <select class="form-control" ng-model="options.filteredBy">
+                    <select class="form-control" ng-model="filterBy">
                         <option ng-repeat='name in columnNames'>{{name}}</option>
                     </select>
 

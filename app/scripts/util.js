@@ -1,8 +1,6 @@
 'use strict'
 
 window.Util = {
-    chartType:"StackedBar",
-    dataURL:"",
     parseData: function(data){
      var parsedData = [];
         var keys = Object.keys(data.data[0]);
@@ -11,5 +9,13 @@ window.Util = {
         parsedData.push(data.data);
 
         return parsedData;
+    },
+
+    setConfig: function(conf){
+        localStorage.setItem('config', JSON.stringify(conf));
+    },
+
+    getConfig: function(){
+        return JSON.parse(localStorage.getItem('config'));
     }
 }

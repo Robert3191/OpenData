@@ -3,83 +3,71 @@
 var express  = require("express"),
     app      = express(),
     openData = require("./routes/opendatas"),
-//    retriveData = require("./modules/RetrieveData"),
+    retrieveData = require("./modules/RetrieveData"),
+    dataAPIs = require("./modules/DataAPI"),
     server   = require('http').createServer(app),
     io       = require('socket.io').listen(server, { log: false });
-
-
-var http = require("http");
 
 var root = "/open-data",
     port=3007;
 
-var options = {
-    host: 'localhost',
-    port: 3011,
-    path: 'open-data/rest/population',
-    headers: {
-        'Content-Type': 'application/json'
+var getProperOptions = function(api){
+    var ApiList =     dataAPIs.APIList;
+
+    for(var index = 0; index < ApiList.length; index ++){
+        if(ApiList[index].name.toLowerCase() == api){
+            console.log(ApiList[index].name);
+            return ApiList[index].options;
+        }
     }
-};
-
-
-
-
-/**
- * getJSON:  REST get request returning JSON object(s)
- * @param options: http options object
- * @param callback: callback to pass the results JSON object(s) back
- */
-var getJSON = function(options, onResult)
-{
-    console.log("rest::getJSON");
-
-    //var prot = http;
-    http.get(options, function(res) {
-        console.log("Got response: " + res.statusCode);
-    }).on('error', function(e) {
-            console.log("Got error: " + e.message);
-        });
-//    var req = prot.request(options, function(res)
-//    {
-//        var output = '';
-//        console.log(options.host + ':' + res.statusCode);
-//        res.setEncoding('utf8');
-//
-//        res.on('data', function (chunk) {
-//            output += chunk;
-//        });
-//
-//        res.on('end', function() {
-//            var obj = JSON.parse(output);
-//            onResult(res.statusCode, obj);
-//        });
-//    });
-//
-//    req.on('error', function(err) {
-//        //res.send('error: ' + err.message);
-//    });
-//
-//    req.end();
-};
-
+}
 
 app.configure(function () {
-    /**
-     * Return the html files.
-     */
     app.use(root, express.static(".."));
-//    app.use(express.bodyParser());
 });
 
 app.get(root + '/rest/opendata', openData.data);
 
-setInterval(function(){
-    getJSON(options,
-        function(satusCode, result){
-            console.log(result);
-        });
-}, 3000);
+io.sockets.on('connection', function(client){
+    console.log("Connected client " + client);
 
-app.listen(port);
+    client.on('getData', function(data){
+        console.log(data);
+        var options = getProperOptions(data);
+
+        console.log("-----In GetData-----");
+        console.log(options);
+        console.log("--------------------");
+
+        retrieveData.getJSON(options,
+            function(satusCode, result){
+                console.log("---RESULTS:");
+                console.log(result);
+                console.log("---End results");
+                if(result instanceof Array){
+                    console.log("Array");
+
+                    var json = {};
+                    json["title"] = "Dracu in praznic";
+                    json["data"]    = result;
+
+                    client.emit('dataReceived', json)
+                }
+                else{
+                    console.log("JSON it is :)")
+                    client.emit('dataReceived', result);
+                }
+            });
+
+        setInterval(function(){
+            retrieveData.getJSON(options,
+                function(satusCode, result){
+                    client.emit('dataReceived', result);
+                });
+        },3000);
+
+    });
+});
+
+server.listen(port);
 console.log('Listening on port ' + port);

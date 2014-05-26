@@ -19,9 +19,30 @@ openData.directive("linechart", function(ChartData) {
             var config = {};
             var options = {};
             var viewId;
+
             var getRandomId = function(){
                 return Math.floor((Math.random() * 100) + 1);
             }
+
+            var setXAxisMaxLength = function(data){
+                console.log(scope.columnNames);
+                var max = 0;
+                var string_length = 0;
+
+                for(var index = 0; index < data.length; index ++){
+                    string_length = data[index][0].toString().length;
+                    if(string_length > max); max = string_length
+                }
+
+                console.log(max);
+                console.log(config);
+
+                if(max <= 4) config["xAxisMaxLength"] = 35;
+                if(max > 4 && max <= 10) config["xAxisMaxLength"] = 70;
+                if(max > 10 && max <= 20) config["xAxisMaxLength"] = 150;
+                if(max > 20) config["xAxisMaxLength"] = 200;
+            }
+
 
             scope.generateChart = function(){
                 loadData();
@@ -45,6 +66,7 @@ openData.directive("linechart", function(ChartData) {
 
                     if(firstLoad){
                         firstLoad = false;
+                        setXAxisMaxLength(data);
                         chart =  new Line(config);
                         chart.draw(data);
                     }

@@ -1,7 +1,7 @@
 window.Line = function(config){
     console.log(config);
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
-        width = 730 - margin.left - margin.right,
+    var margin = {top: 20, right: 20, bottom: config.xAxisMaxLength, left: 50},
+        width = $(".col-lg-8").width() - margin.left - margin.right,
         height = 350 - margin.top - margin.bottom;
 
     var xValues=[];
@@ -29,7 +29,7 @@ window.Line = function(config){
 
         var line = d3.svg.line()
             .x(function(d) { return x(d[0]); })
-            .y(function(d) { return y(d[1]); });
+            .y(function(d) { return y(+d[1]); });
 
         var svg = d3.select("#" + config.selector).append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -44,7 +44,14 @@ window.Line = function(config){
         svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+            .call(xAxis)
+            .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", function(d) {
+                    return "rotate(-65)"
+                });
 
         svg.append("g")
             .attr("class", "y axis")

@@ -1,11 +1,10 @@
 window.BarChart = function(config) {
     $('#' + config.selector).empty();
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
-        width = 750 - margin.left - margin.right,
+    console.log($(".col-lg-8").width());
+    var margin = {top: 20, right: 20, bottom: config.xAxisMaxLength, left: 40},
+        width = $(".col-lg-8").width() - margin.left - margin.right,
         height = 350 - margin.top - margin.bottom;
-
-
 
     var svg = d3.select("#"+config.selector).append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -14,6 +13,7 @@ window.BarChart = function(config) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     this.draw = function(data) {
+
         svg.selectAll(".bar").remove();
         svg.selectAll(".axis").remove();
 
@@ -37,7 +37,14 @@ window.BarChart = function(config) {
         svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+            .call(xAxis)
+            .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", function(d) {
+                    return "rotate(-65)"
+                });
 
         svg.append("g")
             .attr("class", "y axis")

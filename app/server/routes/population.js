@@ -3,17 +3,7 @@ exports.data =function(req, res){
  var year = 1850;
  var json ={
      title:"World Population",
-     timeout:2,
-     chart:[
-        {single:[
-            {x:"year", y:"population"}
 
-        ]},
-        {multi:[
-            {x:"year",y:"sex"},
-            {x:"year",y:"age"}
-        ]}
-     ],
      data:[
          {
              "year":1850,
